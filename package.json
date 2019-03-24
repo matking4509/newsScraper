@@ -1,19 +1,21 @@
 {
-  "name": "newsscraper",
-  "version": "0.0.0",
-  "private": true,
+  "name": "news2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
     "cheerio": "^1.0.0-rc.2",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.9",
-    "express": "~4.16.0",
-    "hbs": "~4.0.1",
-    "http-errors": "~1.6.2",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.2",
     "mongoose": "^5.4.19",
-    "morgan": "~1.9.0"
+    "morgan": "^1.9.1"
   }
 }
