@@ -1,0 +1,38 @@
+<div class="jumbotron">
+    <h1 class="display-4">News Scraper</h1>
+    <p class="lead">Articles from: {{site}}</p>
+    <form method="get" action="/api/scrape">
+        <button type="submit" class="btn btn-primary">Scrape The Site</button>
+    </form>
+    <hr class="my-4">
+    {{#each news}}
+    <form method="post" action="/api/comment">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title"><a target="_blank" href={{link}}>{{title}}</a></h5>
+            <p class="card-text">{{text}}</p>
+            {{#each comments}}
+            <p class="card-text ml-3">{{body}} - {{name}}</p>
+            {{/each}}
+        </div>
+        <input type="hidden" name="newsid" value={{_id}}>
+        <div class="card-footer">
+            <div class="form-group row">
+                <input type="text" class="form-control" name="body" id="comment-body" placeholder="Enter your comment.">
+                <p class="card-text input-group">
+                    <div class="col-2">
+                        <input type="text" class="form-control" name="name" id="comment-name" placeholder="Name (optional)">
+                    </div>
+                    <div class="col-2">
+                        <button type="submit" class="btn btn-primary">Leave a Comment</button>
+                    </div>
+                </p>
+            </div>      
+        </div>
+    </div>
+    </form>
+    {{/each}}
+</div>
+
+    {{!-- {{title}}    
+{{/each}} --}}
