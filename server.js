@@ -20,7 +20,9 @@ app.set("view engine", "handlebars");
 // Make public a static folder
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/newsScraper", { useNewUrlParser: true });
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsScrape";
+mongoose.connect(MONGODB_URI);
+// mongoose.connect("mongodb://localhost/newsScraper", { useNewUrlParser: true });
 
 var siteUrl = "https://www.slashdot.org";
 //Routes
@@ -50,7 +52,6 @@ app.get("/api/scrape", function(req, res) {
     $("article").each(function(i, element) {
       // Save an empty result object
       var result = {};
-
       result.title = $(element).find(".story-title").children("a").text();
       result.link = $(element).find(".story-title").children("a").attr("href");
       result.text = $(element).find(".body").children(".p").text();
@@ -87,12 +88,20 @@ app.post("/api/comment", function(req, res) {
     })
     .then(function(dbNews) {
       // If the User was updated successfully, send it back to the client
-      res.json(dbNews);
+      // res.json(dbNews);
+      res.render("comment", {});
     })
     .catch(function(err) {
       // If an error occurs, send it back to the client
       res.json(err);
     });
+});
+
+app.post("/api/del", function(req, res) {
+  db.Comments.findByIdAndDelete(req.body.cid, (err, todo) => {
+    if (err) return res.status(500).send(err);
+  });
+  res.render("comment", {});
 });
 
 // Start the server

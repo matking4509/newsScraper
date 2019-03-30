@@ -9,7 +9,8 @@ var NewsSchema = new Schema({
   // `title` is required and of type String
   title: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   // `link` is required and of type String
   link: {
@@ -34,6 +35,13 @@ var NewsSchema = new Schema({
   //   ref: "Note"
   // }
 });
+
+// NewsSchema.index({
+//   link: 1,
+//   title: 1,
+// }, {
+//   unique: true,
+// });
 
 // This creates our model from the above schema, using mongoose's model method
 var  News = mongoose.model("News", NewsSchema);
